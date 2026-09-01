@@ -44,10 +44,13 @@ jobs:
 
       - name: Build APK with Flet
         run: |
-          flet build apk
+          flet build apk --verbose
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: ayu-mobile-center-release
-          path: build/apk/*.apk
+          path: |
+            build/apk/*.apk
+            dist/*.apk
