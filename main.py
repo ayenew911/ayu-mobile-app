@@ -1,4 +1,3 @@
-
 import flet as ft
 import sqlite3
 import datetime
@@ -155,7 +154,7 @@ def main(page: ft.Page):
     def show_snackbar(msg, color="green"):
         page.snack_bar = ft.SnackBar(
             content=ft.Text(msg, color="white"),
-            bg_color=color,
+            bgcolor=color,
             duration=3000
         )
         page.snack_bar.open = True
@@ -259,9 +258,10 @@ def main(page: ft.Page):
                     )
                 ),
                 ft.Card(
-                    color="teal_50",
                     content=ft.Container(
                         padding=15, width=240,
+                        bgcolor="teal_50",
+                        border_radius=8,
                         content=ft.Column([
                             ft.Text("የቀን ንጹህ ትርፍ", color="teal_900", weight=ft.FontWeight.BOLD),
                             net_profit_text,
@@ -328,7 +328,7 @@ IMEI: {repair['imei']}
         dlg = ft.AlertDialog(
             title=ft.Text("የ58mm ደረሰኝ ማተሚያ ማሳያ (Thermal Print)", weight=ft.FontWeight.BOLD),
             content=ft.Container(
-                content=ft.Text(receipt_text, fontFamily="Courier", size=12),
+                content=ft.Text(receipt_text, font_family="Courier", size=12),
                 padding=10,
                 bgcolor="grey_100",
                 border_radius=5
@@ -375,14 +375,6 @@ IMEI: {repair['imei']}
         
         rows = cursor.fetchall()
         repairs_table.rows.clear()
-        
-        status_colors = {
-            "ተረክቧል": "blue",
-            "በጥገና ላይ": "orange",
-            "ፍላሽ/ሶፍትዌር ላይ": "purple",
-            "ተጠናቋል/ለደንበኛ ዝግጁ": "green",
-            "ተሰጥቷል": "grey"
-        }
         
         for r in rows:
             repairs_table.rows.append(
